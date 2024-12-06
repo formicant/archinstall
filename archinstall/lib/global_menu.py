@@ -435,22 +435,22 @@ class GlobalMenu(AbstractMenu):
 		XXX: The caller is responsible for wrapping the string with the translation
 			shim if necessary.
 		"""
-		bootloader = self._item_group.find_by_key('bootloader').value
-		boot_partition: disk.PartitionModification | None = None
+		# bootloader = self._item_group.find_by_key('bootloader').value
+		# boot_partition: disk.PartitionModification | None = None
 
-		if disk_config := self._item_group.find_by_key('disk_config').value:
-			for layout in disk_config.device_modifications:
-				if boot_partition := layout.get_boot_partition():
-					break
-		else:
-			return "No disk layout selected"
+		# if disk_config := self._item_group.find_by_key('disk_config').value:
+		# 	for layout in disk_config.device_modifications:
+		# 		if boot_partition := layout.get_boot_partition():
+		# 			break
+		# else:
+		# 	return "No disk layout selected"
 
-		if boot_partition is None:
-			return "Boot partition not found"
+		# if boot_partition is None:
+		# 	return "Boot partition not found"
 
-		if bootloader == Bootloader.Limine:
-			if boot_partition.fs_type != disk.FilesystemType.Fat32:
-				return "Limine does not support booting from filesystems other than FAT32"
+		# if bootloader == Bootloader.Limine:
+		# 	if boot_partition.fs_type != disk.FilesystemType.Fat32:
+		# 		return "Limine does not support booting from filesystems other than FAT32"
 
 		return None
 

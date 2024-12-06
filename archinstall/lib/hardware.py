@@ -135,7 +135,7 @@ class GfxDriver(Enum):
 				]
 			case GfxDriver.NvidiaProprietary:
 				packages += [
-					GfxPackage.NvidiaDkms,
+					# GfxPackage.NvidiaDkms,
 					GfxPackage.Dkms,
 				]
 			case GfxDriver.VMOpenSource:

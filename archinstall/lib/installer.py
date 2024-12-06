@@ -1443,37 +1443,39 @@ Exec = /bin/sh -c "{hook_command}"
 		:param bootloader: Type of bootloader to be added
 		"""
 
-		for plugin in plugins.values():
-			if hasattr(plugin, 'on_add_bootloader'):
-				# Allow plugins to override the boot-loader handling.
-				# This allows for bot configuring and installing bootloaders.
-				if plugin.on_add_bootloader(self):
-					return True
+		# for plugin in plugins.values():
+		# 	if hasattr(plugin, 'on_add_bootloader'):
+		# 		# Allow plugins to override the boot-loader handling.
+		# 		# This allows for bot configuring and installing bootloaders.
+		# 		if plugin.on_add_bootloader(self):
+		# 			return True
 
-		efi_partition = self._get_efi_partition()
-		boot_partition = self._get_boot_partition()
-		root = self._get_root()
+		# efi_partition = self._get_efi_partition()
+		# boot_partition = self._get_boot_partition()
+		# root = self._get_root()
 
-		if boot_partition is None:
-			raise ValueError(f'Could not detect boot at mountpoint {self.target}')
+		# if boot_partition is None:
+		# 	raise ValueError(f'Could not detect boot at mountpoint {self.target}')
 
-		if root is None:
-			raise ValueError(f'Could not detect root at mountpoint {self.target}')
+		# if root is None:
+		# 	raise ValueError(f'Could not detect root at mountpoint {self.target}')
 
-		info(f'Adding bootloader {bootloader.value} to {boot_partition.dev_path}')
+		# info(f'Adding bootloader {bootloader.value} to {boot_partition.dev_path}')
 
-		if uki_enabled:
-			self._config_uki(root, efi_partition)
+		# if uki_enabled:
+		# 	self._config_uki(root, efi_partition)
 
-		match bootloader:
-			case Bootloader.Systemd:
-				self._add_systemd_bootloader(boot_partition, root, efi_partition, uki_enabled)
-			case Bootloader.Grub:
-				self._add_grub_bootloader(boot_partition, root, efi_partition)
-			case Bootloader.Efistub:
-				self._add_efistub_bootloader(boot_partition, root, uki_enabled)
-			case Bootloader.Limine:
-				self._add_limine_bootloader(boot_partition, efi_partition, root)
+		# match bootloader:
+		# 	case Bootloader.Systemd:
+		# 		self._add_systemd_bootloader(boot_partition, root, efi_partition, uki_enabled)
+		# 	case Bootloader.Grub:
+		# 		self._add_grub_bootloader(boot_partition, root, efi_partition)
+		# 	case Bootloader.Efistub:
+		# 		self._add_efistub_bootloader(boot_partition, root, uki_enabled)
+		# 	case Bootloader.Limine:
+		# 		self._add_limine_bootloader(boot_partition, efi_partition, root)
+		
+		pass
 
 	def add_additional_packages(self, packages: str | list[str]) -> None:
 		return self.pacman.strap(packages)
